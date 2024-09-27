@@ -1,0 +1,15 @@
+import numpy as np
+from sklearn.ensemble import IsolationForest
+
+# Example traffic data (features like packet size, duration, etc.)
+traffic_data = np.array([[500, 0.3], [550, 0.4], [600, 0.35], [10000, 0.1]]) # [packet size, latency]
+
+# Fit the model
+model = IsolationForest(n_estimators=100, contamination=0.1)
+model.fit(traffic_data)
+
+# Predict anomalies
+anomalies = model.predict(traffic_data)
+
+# Output: -1 means anomaly, 1 means normal
+print("Anomalies detected in traffic data:", anomalies)
